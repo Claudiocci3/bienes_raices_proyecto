@@ -1,0 +1,38 @@
+*  Crear servidor con express  *
+//almacenar express
+ const express = require('express');
+//crear app
+ const app = express();
+//definir un puerto y arrancar el server
+const PORT = 3000;
+app.listen(PORT, ()=>{
+    console.log("escuchando en el puerto :", PORT);
+})
+
+/Arquitectura MVC
+
+*Modelo: se encarga de todas las interacciones en la db, obtener datos,actualizarlos y eliminarlos.
+El modelo se encarga de consultar la db, obtiene la info pero no la muestra, de eso se encarga view.
+El modelo tampoco se encarga de actualizar la info, es el controlador quien decide cuando llamarlo.
+
+*Vista
+Se encarga de todo lo que se ve en pantalla.
+
+*Controlador
+comunica modelo y vista, antes de que el modelo consulte en la db el controlador es el encargado de 
+llamar un modelo en especifico.
+Una vez consultado el mo0delo el controlador recibe esa info, manda a llamar a la vista y le pasa la info
+
+
+** ORM **
+    object relational mapping
+  Es una tecnica que se utiliza donde los datos de una db son tratados como objetos, utilizando un paradigma oop
+  -ventajas de usar orm 
+    comenzar a crear apps sin la necesidad de escribir codigo sql y tampoco saber modelado de datos.
+    Velocidad en desarrollo ya que tienen muchos metodos para crud.
+    La mayoria de orms cuentan con medidas de seguridad.
+
+**LEER DATOS DE UN FORMULARIO**
+siempre que vamos a leer la info que recibimos se usa req.body
+despues en la app habilitar la lectura con el siguiente middleware: 
+app.use( express.urlencoded({extended: true}));

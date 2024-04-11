@@ -1,0 +1,6 @@
+1) crear archivo db.js
+2) importar Sequelize
+3) crear instancia de Sequelize = const db = new Sequelize(nameDb,User,Pass,{objCFG});
+4) importar db a la app
+
+claves db en pc: root. en ntb: hola
