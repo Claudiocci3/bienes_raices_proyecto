@@ -1,5 +1,6 @@
 import Usuario from "../models/Usuario.js";
-// import validarRegistro from '../utils/validaciones.js'
+import { generarID } from "../helpers/tokens.js";
+import { emailRegistro } from "../helpers/emails.js"
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
     pagina: "Iniciar sesion",
@@ -45,11 +46,11 @@ const registrar = async (req, res) => {
     }
 
     // Validar longitud de la contraseña
-    if (password.length < 8) {
-      errores.push({
-        error: "La contraseña debe tener al menos 8 caracteres",
-      });
-    }
+    // if (password.length < 8) {
+    //   errores.push({
+    //     error: "La contraseña debe tener al menos 8 caracteres",
+    //   });
+    // }
 
     // Verificar si las contraseñas coinciden
     if (password !== repetir_password) {
@@ -73,15 +74,24 @@ const registrar = async (req, res) => {
       });
     }
 
-    await Usuario.create({
+    const usuario = await Usuario.create({
       nombre,
       email,
       password,
-      token:123
+      token: generarID()
     });
-   return res.status(200).render("auth/registro", {
-    pagina: "Crear pagina",
-    mensaje: "Usuario creado correctamente"
+    
+    //enviar email de confirmacion
+    emailRegistro({
+      nombre: usuario.nombre,
+      email: usuario.email,
+      token: usuario.token
+    })
+
+
+   return res.status(200).render("auth/mensaje", {
+    pagina: "Cuenta creada correctamente",
+    mensaje: "Hemos enviado un mail de confirmacion para confirmar tu cuenta"
    });
 
   } catch (error) {
