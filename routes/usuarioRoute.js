@@ -3,6 +3,8 @@ import { formularioLogin } from '../controllers/usuarioController.js';
 import { formularioRegistro } from '../controllers/usuarioController.js';
 import { formularioOlvidePassword } from '../controllers/usuarioController.js';
 import { registrar } from '../controllers/usuarioController.js';
+import { confirmar } from '../controllers/usuarioController.js';
+
 
 
 
@@ -16,6 +18,6 @@ router.post('/registro', registrar);
 
 router.get('/olvide-password', formularioOlvidePassword);
 
- 
+router.get('/confirmar/:token', confirmar);
 
 export default router;

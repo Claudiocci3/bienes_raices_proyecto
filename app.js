@@ -28,6 +28,6 @@ app.use( express.static('public') );
 //routing
 app.use('/auth', usuarioRoutes);
 
-app.listen(PORT, ()=>{
+app.listen(process.env.PORT ||3000, ()=>{
     console.log("escuchando en el puerto :", PORT);
 })
